@@ -1,0 +1,5 @@
+id,name,description,price,category,seller_name
+1,"X-Burger Artesanal","Artisanal burger with cheddar cheese, lettuce and tomato",25.90,SNACKS,"Maria's Snack Bar"
+2,"Pizza Margherita","Traditional pizza with tomato sauce, mozzarella and basil",35.00,SNACKS,"João's Pizza Shop"
+3,"Cola Soda","Cola flavored soda 350ml",5.50,BEVERAGES,"Maria's Snack Bar"
+4,"Milk Pudding","Homemade condensed milk pudding",8.00,DESSERTS,"Ana's Bakery"
