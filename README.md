@@ -90,17 +90,20 @@ src/
 ## Main Features
 
 ### Authentication and Registration
+
 - Login for customers, sellers and delivery persons
 - Registration of new users
 - Credential validation
 
 ### Product Management
+
 - Product registration by sellers
 - Categorization (beverages, snacks, desserts)
 - Availability control
 - Search by name and category
 
 ### Order System
+
 - Order creation by customers
 - Adding items with observations
 - Automatic calculation of subtotals and totals
@@ -108,12 +111,14 @@ src/
 - Order cancellation
 
 ### Payment Processing
+
 - Support for multiple payment methods
 - Integration with external payment API
 - Failed payment retry
 - Transfers to sellers and delivery persons
 
 ### Delivery System
+
 - Automatic assignment of delivery persons
 - Availability control
 - Delivery tracking
@@ -121,6 +126,7 @@ src/
 ## How to Run
 
 ### Prerequisites
+
 - Java 11 or higher
 - Maven 3.6 or higher
 
@@ -156,7 +162,7 @@ mvn test
 
 The system implements a **layered architecture** with both CLI and REST API interfaces:
 
-### Components:
+### Components
 
 1. **CLI (Command Line Interface):**
    - Interactive user interface via SimpleCLI
@@ -180,7 +186,7 @@ The system implements a **layered architecture** with both CLI and REST API inte
    - **CsvDataManager:** CSV file-based data storage
    - Repository pattern for data access abstraction
 
-### Data Flow:
+### Data Flow
 
 ```
 CLI → ApiClient → Server/MockServer → Services → Repositories → Storage
@@ -188,7 +194,8 @@ CLI → ApiClient → Server/MockServer → Services → Repositories → Storag
 
 ## Technologies and Patterns
 
-### Technologies:
+### Technologies
+
 - **Java 11:** Core language
 - **Maven:** Build and dependency management
 - **Javalin 5.6.3:** Lightweight REST API framework
@@ -196,7 +203,8 @@ CLI → ApiClient → Server/MockServer → Services → Repositories → Storag
 - **JUnit 5:** Unit testing framework
 - **SLF4J:** Logging facade
 
-### Design Patterns:
+### Design Patterns
+
 - **Layered Architecture:** Clear separation of concerns
 - **Repository Pattern:** Data access abstraction
 - **DTO Pattern:** Clean data transfer between layers
@@ -205,7 +213,7 @@ CLI → ApiClient → Server/MockServer → Services → Repositories → Storag
 
 ## Demonstration
 
-### Available Features:
+### Available Features
 
 1. **Registration and Login:**
    - Register new customer
@@ -226,14 +234,14 @@ CLI → ApiClient → Server/MockServer → Services → Repositories → Storag
    - Cancel orders (when allowed)
    - Track status in real time
 
-### Pre-registered Products:
+### Pre-registered Products
 
 - Artisanal X-Burger (R$ 25.90) - Maria's Snack Bar
 - Margherita Pizza (R$ 35.00) - João's Pizzeria
 - Cola Soda (R$ 5.50) - Maria's Snack Bar
 - Milk Pudding (R$ 8.00) - Ana's Sweets Shop
 
-### How to Test:
+### How to Test
 
 1. Run: `java -jar target/order-management-system-1.0.0.jar`
 2. Choose option "2" to register
