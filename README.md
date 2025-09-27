@@ -31,7 +31,21 @@ src/
 │   ├── java/
 │   │   └── com/
 │   │       └── ordermanagement/
-│   │           ├── Main.java                 # Main class
+│   │           ├── Main.java                 # Main CLI entry point
+│   │           ├── ServerMain.java           # Server entry point
+│   │           ├── api/                      # API layer
+│   │           │   ├── HttpApiClient.java    # HTTP client implementation
+│   │           │   ├── MockApiClient.java    # Mock API client for testing
+│   │           │   └── MockApiServer.java    # Mock server implementation
+│   │           ├── cli/                      # Command line interface
+│   │           │   └── SimpleCLI.java        # CLI implementation
+│   │           ├── dto/                      # Data transfer objects
+│   │           │   ├── AddressDto.java
+│   │           │   ├── CustomerDto.java
+│   │           │   ├── OrderDto.java
+│   │           │   ├── OrderItemDto.java
+│   │           │   ├── PaymentCardDto.java
+│   │           │   └── ProductDto.java
 │   │           ├── model/                    # Domain entities
 │   │           │   ├── User.java
 │   │           │   ├── Customer.java
@@ -52,6 +66,8 @@ src/
 │   │           │   ├── ProductRepository.java
 │   │           │   ├── OrderRepository.java
 │   │           │   └── PaymentRepository.java
+│   │           ├── server/                   # Server components
+│   │           │   └── JavalinServer.java    # Javalin REST API server
 │   │           ├── service/                  # Business logic
 │   │           │   ├── AuthService.java
 │   │           │   ├── ProductService.java
@@ -59,6 +75,8 @@ src/
 │   │           │   ├── PaymentService.java
 │   │           │   ├── DeliveryService.java
 │   │           │   └── PaymentApiClient.java
+│   │           ├── storage/                  # Data persistence
+│   │           │   └── CsvDataManager.java   # CSV file storage
 │   │           └── enums/                    # Enumerations
 │   │               ├── OrderStatus.java
 │   │               ├── PaymentMethod.java
@@ -115,8 +133,11 @@ mvn clean compile
 # Generate executable JAR
 mvn clean package
 
-# Run the JAR (recommended)
+# Run CLI mode (recommended)
 java -jar target/order-management-system-1.0.0.jar
+
+# Run REST API Server
+java -cp target/order-management-system-1.0.0.jar com.ordermanagement.ServerMain
 
 # Or run with Maven (may have terminal input issues)
 mvn exec:java
@@ -133,41 +154,54 @@ mvn test
 
 ## Architecture
 
-The system implements a **Command Line Interface (CLI)** that interacts with a **simulated back-end** via **REST API**:
+The system implements a **layered architecture** with both CLI and REST API interfaces:
 
 ### Components:
 
 1. **CLI (Command Line Interface):**
-   - Interactive user interface
+   - Interactive user interface via SimpleCLI
    - Main menu and submenus for different operations
    - Data input and validation
 
-2. **DTOs (Data Transfer Objects):**
-   - Objects for data transfer between client and server
-   - JSON-friendly data representation
+2. **API Layer:**
+   - **HttpApiClient:** Real HTTP client for production
+   - **MockApiClient:** Simulated client for testing
+   - **MockApiServer:** In-memory server simulation
 
-3. **API Client:**
-   - Simulated client that abstracts HTTP calls
-   - MockApiClient for demonstration without real server
+3. **Server Components:**
+   - **JavalinServer:** REST API server using Javalin framework
+   - **ServerMain:** Server bootstrap and configuration
 
-4. **Mock Server:**
-   - Complete back-end simulation
-   - In-memory storage
-   - Implemented business logic
+4. **DTOs (Data Transfer Objects):**
+   - Clean data transfer between layers
+   - JSON serialization with Jackson
+
+5. **Persistence:**
+   - **CsvDataManager:** CSV file-based data storage
+   - Repository pattern for data access abstraction
 
 ### Data Flow:
 
 ```
-CLI → MockApiClient → MockApiServer → DTOs
+CLI → ApiClient → Server/MockServer → Services → Repositories → Storage
 ```
 
-## Used Patterns
+## Technologies and Patterns
 
-- **Client-Server Architecture:** Clear separation between client and server
-- **DTO Pattern:** For structured data transfer
-- **Mock Object Pattern:** For back-end simulation
-- **Command Pattern:** For CLI operations
-- **Factory Pattern:** For object creation
+### Technologies:
+- **Java 11:** Core language
+- **Maven:** Build and dependency management
+- **Javalin 5.6.3:** Lightweight REST API framework
+- **Jackson:** JSON serialization/deserialization
+- **JUnit 5:** Unit testing framework
+- **SLF4J:** Logging facade
+
+### Design Patterns:
+- **Layered Architecture:** Clear separation of concerns
+- **Repository Pattern:** Data access abstraction
+- **DTO Pattern:** Clean data transfer between layers
+- **Mock Object Pattern:** Testing without external dependencies
+- **Service Layer Pattern:** Business logic encapsulation
 
 ## Demonstration
 
