@@ -22,7 +22,7 @@ public class DeliveryService {
         return deliveryPersonRepository.findByAvailable(true);
     }
     
-    public DeliveryPerson assignDeliveryPerson(Long orderId) {
+    public DeliveryPerson assignDeliveryPerson() {
         List<DeliveryPerson> availablePersons = getAvailableDeliveryPersons();
         if (!availablePersons.isEmpty()) {
             DeliveryPerson deliveryPerson = availablePersons.get(0);

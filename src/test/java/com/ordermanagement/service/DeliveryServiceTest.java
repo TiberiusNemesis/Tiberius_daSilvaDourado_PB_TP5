@@ -92,7 +92,7 @@ class DeliveryServiceTest {
         when(deliveryPersonRepository.findByAvailable(true)).thenReturn(availablePersons);
         when(deliveryPersonRepository.save(deliveryPerson1)).thenReturn(deliveryPerson1);
 
-        DeliveryPerson result = deliveryService.assignDeliveryPerson(1L);
+        DeliveryPerson result = deliveryService.assignDeliveryPerson();
 
         assertNotNull(result);
         assertEquals(deliveryPerson1.getId(), result.getId());
@@ -107,7 +107,7 @@ class DeliveryServiceTest {
         when(deliveryPersonRepository.findByAvailable(true)).thenReturn(new ArrayList<>());
 
         assertThrows(RuntimeException.class, () ->
-            deliveryService.assignDeliveryPerson(1L)
+            deliveryService.assignDeliveryPerson()
         );
         verify(deliveryPersonRepository, times(1)).findByAvailable(true);
         verify(deliveryPersonRepository, never()).save(any());
